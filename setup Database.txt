@@ -1,0 +1,61 @@
+CREATE SCHEMA `todoapp` ;
+
+CREATE TABLE `todoapp`.`tasks` (
+  `task_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `image` VARCHAR(255) NULL,
+  `priority` ENUM('H', 'M', 'L') NOT NULL,
+  PRIMARY KEY (`task_id`));
+
+CREATE TABLE `todoapp`.`todolist` (
+  `todo_id` INT NOT NULL AUTO_INCREMENT,
+  `task_id` INT NOT NULL,
+  `todoname` VARCHAR(255) NOT NULL,
+  `status` TINYINT NOT NULL,
+  PRIMARY KEY (`todo_id`),
+  INDEX `task_id_idx` (`task_id` ASC) VISIBLE,
+  CONSTRAINT `task_id`
+    FOREIGN KEY (`task_id`)
+    REFERENCES `todoapp`.`tasks` (`task_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+ALTER TABLE `todoapp`.`tasks` 
+ADD COLUMN `due_date` DATE NOT NULL AFTER `priority`,
+ADD COLUMN `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `due_date`,
+CHANGE COLUMN `image` `imageurl` VARCHAR(255) NULL DEFAULT NULL ;
+
+ALTER TABLE `todoapp`.`todolist` 
+DROP FOREIGN KEY `task_id`;
+ALTER TABLE `todoapp`.`todolist` 
+ADD CONSTRAINT `task_id`
+  FOREIGN KEY (`task_id`)
+  REFERENCES `todoapp`.`tasks` (`task_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+insert into tasks (task_id, name, priority, due_date) values
+(1, 'Christmas celebration', 'H', '2020-12-23'),
+(2, 'New Year celebration', 'H', '2020-12-28'),
+(3, 'Assessment preparation', 'M', '2020-12-16');
+
+insert into todolist (todo_id, task_id, todoname, status) values
+(1, 1, 'Order log cake', 0),
+(2, 2, 'House cleaning', 0),
+(3, 1, 'Buy wine', 1),
+(4, 1, 'Order turkey and ham', 1),
+(5, 1, 'Collect orders', 0),
+(6, 2, 'Invite guests', 1);
+
+select * from tasks;
+select * from todolist;
+
+select t.*, count(td.task_id) as count from tasks as t
+left join todolist as td using (task_id)
+group by t.task_id, t.name;
+
+select t.name, t.priority, t.due_date, td.todoname, td.status from tasks t left join todolist td using (task_id) where t.task_id = 3
+
+delete from tasks where task_id=1;
+

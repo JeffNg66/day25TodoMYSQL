@@ -1,0 +1,28 @@
+<mat-list>
+    <div>
+        <mat-list-item class="list-group-item" *ngFor="let t of tasks">
+            <div class="special add-padding" >
+                <div fxLayout="column">
+                    <strong>{{ t.name }}</strong>
+                    <div fxLayoutAlign="space-around start">
+                        <div fxLayoutGap="20px">
+                            <small>Due on: {{ t.due_date | date }}</small>
+                            <small>Priority: {{ t.priority }}</small>
+                        </div>
+                    </div>
+                </div>
+                <span class="example-spacer"></span>
+                <div fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="end end">
+                    <button class="ml-1" mat-flat-button color="primary" [routerLink]="['todolist', t.task_id]"><mat-icon>input</mat-icon></button>
+                    <button class="ml-1" mat-flat-button color="accent"><mat-icon>create</mat-icon></button>
+                    <button class="ml-1" mat-flat-button color="warn" 
+                        [disabled]="t.count > 0" (click)="deleteTask(t.task_id)"
+                    ><mat-icon>delete</mat-icon></button>
+                    <!-- <button mat-flat-button color="primary" (click)="completeSingleToDo(i)"><mat-icon>done_outline</mat-icon></button>
+                    <button class="ml-1" mat-flat-button color="accent" (click)="editToDo(i)"><mat-icon>create</mat-icon></button>
+                    <button class="ml-1" mat-flat-button color="warn" (click)="deleteSingleToDo(i)"><mat-icon>delete</mat-icon></button> -->
+                </div>
+            </div>
+        </mat-list-item>
+    </div>
+</mat-list>

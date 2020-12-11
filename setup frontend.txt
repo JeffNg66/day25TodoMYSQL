@@ -1,0 +1,19 @@
+ng new frontend
+
+cd frontend
+
+ng add @angular/material
+
+npm i @angular/flex-layout
+
+npm i @angular/material-moment-adapter
+
+npm i moment
+
+--------------------------------------------------
+
+ng g c /components/tasks --flat --skipTests --module=app.module
+
+ng g s /services/taskservice --flat --skipTests
+
+ng g c /components/todolist --flat --skipTests --module=app.module
