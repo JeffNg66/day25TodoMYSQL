@@ -1,0 +1,40 @@
+<mat-card>
+<div class="example-container">
+<!-- <form [formGroup]="taskformSvc.form" (ngSubmit)="onSubmit(formDirective)" #formDirective="ngForm"> -->
+    <form class="example-container" [formGroup]="taskformSvc.form">
+        <!-- Enter Task -->
+        <mat-form-field appearance="outline">
+            <mat-label>Enter Your Task</mat-label>
+            <input formControlName="name" matInput required> <!-- placeholder="Enter Your Task"> -->
+            <mat-icon matSuffix>add_task</mat-icon>
+            <mat-error>Entry needed</mat-error>
+        </mat-form-field>
+        <!-- Pick Priority -->
+        <div class="add-bottom-padding">
+            <label>Priority: &nbsp; &nbsp;</label>
+            <mat-radio-group formControlName="priority">
+                <mat-radio-button *ngFor="let p of priorityList" value="{{p}}">{{p}}</mat-radio-button>
+               </mat-radio-group>
+        </div>    
+        <!-- Due Date -->
+        <div class="add-bottom-padding">
+            <mat-form-field>
+                <input formControlName="due_date" matInput [matDatepicker]="picker" placeholder="Date to complete task" [min]="today" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>Please select a date</mat-error>
+                <!-- <mat-error *ngIf="form.get('dueDate').hasError('required') && form.get('dueDate').touched">Please select a date</mat-error> -->
+            </mat-form-field>
+        </div>
+        <!-- Button - Add/Edit & Clear -->
+        <div class="add-bottom-padding button-row">
+            <!-- <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ !editStatus ? "Add" : "Edit"}}</button> -->
+            <button mat-raised-button color="primary" 
+                type="button" [disabled]="taskformSvc.form.invalid"
+                (click)="saveThisTask()"
+            >{{ !editStatus ? "Add" : "Edit"}}</button>
+            <button mat-flat-button color="primary" type="button" (click)="clearForm()">{{ !editStatus ? "Clear" : "Cancel Edit" }}</button>
+        </div>
+    </form>
+</div>
+</mat-card>

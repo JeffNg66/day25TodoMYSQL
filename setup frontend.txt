@@ -17,3 +17,7 @@ ng g c /components/tasks --flat --skipTests --module=app.module
 ng g s /services/taskservice --flat --skipTests
 
 ng g c /components/todolist --flat --skipTests --module=app.module
+
+ng g c components/onetask --flat --skipTests --module=app.module
+
+ng g s services/taskform --flat --skipTests 

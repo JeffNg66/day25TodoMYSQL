@@ -9,21 +9,23 @@ import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import {
-  MAT_MOMENT_DATE_FORMATS,
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
+// import {
+//   MAT_MOMENT_DATE_FORMATS,
+//   MomentDateAdapter,
+//   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+// } from '@angular/material-moment-adapter';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { TasksComponent } from './components/tasks.component';
 import { TodolistComponent } from './components/todolist.component';
+import { OnetaskComponent } from './components/onetask.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TasksComponent,
-    TodolistComponent
+    TodolistComponent,
+    OnetaskComponent
   ],
   imports: [
     BrowserModule,
@@ -36,13 +38,13 @@ import { TodolistComponent } from './components/todolist.component';
     HttpClientModule,
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-SG'},
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-    },
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS} 
+    // {provide: MAT_DATE_LOCALE, useValue: 'en-SG'},
+    // {
+    //   provide: DateAdapter,
+    //   useClass: MomentDateAdapter,
+    //   deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    // },
+    // {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS} 
   ],
   bootstrap: [AppComponent]
 })

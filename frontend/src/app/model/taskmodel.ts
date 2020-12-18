@@ -1,16 +1,17 @@
 export interface Tasks {
-    id?: number;
+    task_id?: number;
     name: string;
-    imageurl: string;
+    imageurl?: string;
     priority: string;
     due_date: Date;
-    count: number;
+    count?: number;
 }
 
-export interface TodoList {
-    name: string;
-    priority: string;
-    due_date: Date;
+export interface Todos {
+    // name: string;
+    // priority: string;
+    // due_date: Date;
+    todoid: number;
     todoname: string;
     status: boolean;
 }

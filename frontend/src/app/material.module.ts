@@ -6,11 +6,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+// import { MatGridListModule } from '@angular/material/grid-list';
 
 const MATERIAL = [
     MatButtonModule,
@@ -20,11 +23,14 @@ const MATERIAL = [
     MatFormFieldModule,
     MatListModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatRadioModule,
     MatToolbarModule,
     MatDividerModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    // MatGridListModule,
 ];
 
 @NgModule ({

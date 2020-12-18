@@ -3,11 +3,13 @@ CREATE SCHEMA `todoapp` ;
 CREATE TABLE `todoapp`.`tasks` (
   `task_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
-  `image` VARCHAR(255) NULL,
-  `priority` ENUM('H', 'M', 'L') NOT NULL,
-  PRIMARY KEY (`task_id`));
-
-CREATE TABLE `todoapp`.`todolist` (
+  `imageurl` VARCHAR(255) NOT NULL,
+  `priority` ENUM('Low', 'Medium', 'High') NOT NULL,
+  `due_date` VARCHAR(30) NOT NULL,
+  `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`task_id`)); 
+  
+  CREATE TABLE `todoapp`.`todolist` (
   `todo_id` INT NOT NULL AUTO_INCREMENT,
   `task_id` INT NOT NULL,
   `todoname` VARCHAR(255) NOT NULL,
@@ -17,28 +19,13 @@ CREATE TABLE `todoapp`.`todolist` (
   CONSTRAINT `task_id`
     FOREIGN KEY (`task_id`)
     REFERENCES `todoapp`.`tasks` (`task_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-ALTER TABLE `todoapp`.`tasks` 
-ADD COLUMN `due_date` DATE NOT NULL AFTER `priority`,
-ADD COLUMN `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `due_date`,
-CHANGE COLUMN `image` `imageurl` VARCHAR(255) NULL DEFAULT NULL ;
-
-ALTER TABLE `todoapp`.`todolist` 
-DROP FOREIGN KEY `task_id`;
-ALTER TABLE `todoapp`.`todolist` 
-ADD CONSTRAINT `task_id`
-  FOREIGN KEY (`task_id`)
-  REFERENCES `todoapp`.`tasks` (`task_id`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE;
-
-insert into tasks (task_id, name, priority, due_date) values
-(1, 'Christmas celebration', 'H', '2020-12-23'),
-(2, 'New Year celebration', 'H', '2020-12-28'),
-(3, 'Assessment preparation', 'M', '2020-12-16');
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+    
+insert into tasks (task_id, name, imageurl, priority, due_date) values
+(1, 'Christmas celebration', '', 'High', '2020-12-23'),
+(2, 'New Year celebration', '', 'Low', '2020-12-28'),
+(3, 'Assessment preparation', '', 'Medium', '2020-12-16');
 
 insert into todolist (todo_id, task_id, todoname, status) values
 (1, 1, 'Order log cake', 0),

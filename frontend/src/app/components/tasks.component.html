@@ -13,8 +13,14 @@
                 </div>
                 <span class="example-spacer"></span>
                 <div fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="end end">
-                    <button class="ml-1" mat-flat-button color="primary" [routerLink]="['todolist', t.task_id]"><mat-icon>input</mat-icon></button>
-                    <button class="ml-1" mat-flat-button color="accent"><mat-icon>create</mat-icon></button>
+                    <button class="ml-1" mat-flat-button color="primary" 
+                        (click)="goTodolist(t)"
+                    ><mat-icon>input</mat-icon></button>
+
+                    <button class="ml-1" mat-flat-button color="accent"
+                        (click)="editTask(t)"
+                    ><mat-icon>create</mat-icon></button>
+                    
                     <button class="ml-1" mat-flat-button color="warn" 
                         [disabled]="t.count > 0" (click)="deleteTask(t.task_id)"
                     ><mat-icon>delete</mat-icon></button>
@@ -24,5 +30,9 @@
                 </div>
             </div>
         </mat-list-item>
+        <div fxLayoutAlign="space-around end">
+            <button class="ml-1" mat-flat-button color="primary" [routerLink]="['task','','','','','']"
+            ><mat-icon>add_task</mat-icon>&nbsp; New Task</button>
+        </div>
     </div>
 </mat-list>
